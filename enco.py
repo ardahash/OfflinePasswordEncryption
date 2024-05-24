@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import messagebox
 from cryptography.fernet import Fernet
 import os
+import string
+import random
 
 # Generate and load encryption key
 def generate_key():
@@ -39,6 +41,11 @@ def retrieve_passwords():
     
     return [line.strip().split(",") for line in passwords]
 
+def generate_secure_password(length=12):
+    characters = string.ascii_letters + string.digits + string.punctuation
+    secure_password = ''.join(random.choice(characters) for _ in range(length))
+    return secure_password
+
 # GUI for Password Manager
 class PasswordManager:
     def __init__(self, root):
@@ -66,6 +73,9 @@ class PasswordManager:
         self.show_button = tk.Button(root, text="Show Passwords", command=self.show_passwords)
         self.show_button.grid(row=4, column=0, columnspan=2)
 
+        self.generate_button = tk.Button(root, text="Generate Secure Password", command=self.generate_password)
+        self.generate_button.grid(row=5, column=0, columnspan=2)
+
     def add_password(self):
         website = self.website_entry.get()
         username = self.username_entry.get()
@@ -76,6 +86,12 @@ class PasswordManager:
             messagebox.showinfo("Success", "Password added successfully")
         else:
             messagebox.showwarning("Input Error", "Please fill all fields")
+
+    def generate_password(self):
+        secure_password = generate_secure_password()
+        self.password_entry.delete(0, tk.END)
+        self.password_entry.insert(0, secure_password)
+        messagebox.showinfo("Generated Password", f"Generated secure password: {secure_password}")
 
     def show_passwords(self):
         passwords = retrieve_passwords()
