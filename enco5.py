@@ -72,15 +72,20 @@ class PasswordManager:
         self.root.title("Hurbas Simple Offline Password Manager")
 
         # set the size of the window
-        self.root.geometry("800x600")
+        
 
         # Set the style
         style = ttk.Style()
+        style.theme_use('clam')  # Use the 'clam' theme
+        style.configure(".", background="black", foreground="white")  # Set background and foreground color for all elements
         style.configure("TLabel", font=("Arial", 12))
         style.configure("TButton", font=("Arial", 12))
         style.configure("TEntry", font=("Arial", 12))
         style.configure("Treeview", font=("Arial", 12), rowheight=25)
         style.configure("Treeview.Heading", font=("Arial", 14, "bold"))
+        self.root.geometry("800x600")
+        self.root.configure(bg='black')
+
 
         self.mainframe = ttk.Frame(root, padding="10 10 10 10")
         self.mainframe.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
