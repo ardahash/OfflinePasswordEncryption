@@ -72,20 +72,15 @@ class PasswordManager:
         self.root.title("Hurbas Simple Offline Password Manager")
 
         # set the size of the window
-        
+        self.root.geometry("800x600")
 
         # Set the style
         style = ttk.Style()
-        style.theme_use('clam')  # Use the 'clam' theme
-        style.configure(".", background="black", foreground="white")  # Set background and foreground color for all elements
         style.configure("TLabel", font=("Arial", 12))
         style.configure("TButton", font=("Arial", 12))
         style.configure("TEntry", font=("Arial", 12))
         style.configure("Treeview", font=("Arial", 12), rowheight=25)
         style.configure("Treeview.Heading", font=("Arial", 14, "bold"))
-        self.root.geometry("800x600")
-        self.root.configure(bg='black')
-
 
         self.mainframe = ttk.Frame(root, padding="10 10 10 10")
         self.mainframe.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
@@ -113,6 +108,28 @@ class PasswordManager:
 
         self.generate_button = ttk.Button(self.mainframe, text="Generate Secure Password", command=self.generate_password)
         self.generate_button.grid(row=5, column=0, pady=10, columnspan=2)
+
+        self.dark_mode = False
+        self.toggle_dark_mode_button = ttk.Button(self.mainframe, text="Toggle Dark Mode", command=self.toggle_dark_mode)
+        self.toggle_dark_mode_button.grid(row=6, column=0, pady=10, columnspan=2)
+    
+
+    def toggle_dark_mode(self):
+        style = ttk.Style()
+        if self.dark_mode:
+            style.configure('TFrame', background='SystemButtonFace')
+            style.configure('TLabel', background='SystemButtonFace', foreground='black')
+            style.configure('TButton', background='SystemButtonFace', foreground='black')
+            style.configure('TEntry', fieldbackground='white', foreground='black', insertcolor='black')
+            self.root.configure(bg='SystemButtonFace')
+            self.dark_mode = False
+        else:
+            style.configure('TFrame', background='black')
+            style.configure('TLabel', background='black', foreground='white')
+            style.configure('TButton', background='black', foreground='black')  # Keep text color black
+            style.configure('TEntry', fieldbackground='white', foreground='black', insertcolor='black')  
+            self.root.configure(bg='black')
+            self.dark_mode = True
 
     def add_password(self):
         website = self.website_entry.get()

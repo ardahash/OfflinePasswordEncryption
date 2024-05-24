@@ -1,8 +1,12 @@
 # OfflinePasswordEncryption
  An entire password manager in a single Python script with a Gui
 
-## Instructions
+## Instructions for offline usage
+enco.exe is the compiled distribution ready version of enco5.py code, the latest version of this project, so that you can just click and run without having to instal python or and IDE on your computer.
 
+
+
+## for devs
 Clone the repo or copy-paste any version of the Enco.py codes.
 Run the enco.py script.
 
